@@ -47,6 +47,25 @@ php artisan admin:create
 php artisan serve
 ```
 
+```
+Fix: Install OpenSSL 1.1 in Codespaces
+Here’s the step-by-step:
+
+bash
+Copy
+Edit
+# 1. Add Ubuntu 20.04 (focal) sources for OpenSSL 1.1
+echo "deb http://security.ubuntu.com/ubuntu focal-security main" | sudo tee /etc/apt/sources.list.d/focal-security.list
+
+# 2. Pin OpenSSL 1.1 to not affect other packages
+echo -e "Package: *\nPin: release a=focal-security\nPin-Priority: 100" | sudo tee /etc/apt/preferences.d/focal
+
+# 3. Update and install libssl1.1
+sudo apt update
+sudo apt install libssl1.1 -y
+This installs libssl1.1 alongside the existing OpenSSL 3, so it won’t break the system.
+```
+
 Once you have installed the Laravel app you can use the helper command to create an admin account using `php artisan admin:create` in your terminal.
 
 ### How to set up the blog using the demo settings
